@@ -1,0 +1,20 @@
+{
+  "frameworks": [
+    {
+      "id": 1,
+      "name": "React"
+    },
+    {
+      "id": 2,
+      "name": "Vue"
+    },
+    {
+      "id": 3,
+      "name": "Angular"
+    },
+    {
+      "id": 4,
+      "name": "Vite"
+    }
+  ]
+}
