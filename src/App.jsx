@@ -8,54 +8,23 @@ import data from "./helpers/data.json";
 import { calcularTotalPagar } from "./helpers/calcularTotalPagar";
 
 function App() {
-  //console.log(data);
-  //===========================================================
-  //======================== COMPONENTES ========================
-  //===========================================================
-  /* const ElementoLista = (props) => {
-    return (
-      <>
-        <li key={props.name}>{props.frame.name}</li>
-      </>
-    );
-  };*/
-
-  //===========================================================
-  //======================== VARIABLES ========================
-  //===========================================================
   const [cantidad, setCantidad] = useState(1000),
     [meses, setMeses] = useState(6),
     [total, setTotal] = useState(calcularTotalPagar(cantidad, meses)),
     MIN = 1000,
     MAX = 100000,
     STEP = 1000;
-  //[pagoMensual, setPagoMensual] = useState(0);
 
-  //===========================================================
-  //======================== FUNCIONES ========================
-  //===========================================================
+  const pagoMensual = total / meses;
 
-  /*  useEffect(() => {
-    console.log("Modificando");
+  // const pagoMensual = () => {
+  //   console.log(total / meses);
+  //   return total / meses;
+  // };
 
-
-    const calcularPagoMensual = () => {
-
-      if (meses !== 0) {
-        setPagoMensual(total / meses);
-      } else {
-        setPagoMensual(0);
-      }
-    };
-
-    
-    calcularPagoMensual();
-  }, [cantidad, meses]);*/
-
-  const pagoMensual = () => {
-    console.log(total / meses);
-    return total / meses;
-  };
+  useEffect(() => {
+    setTotal(calcularTotalPagar(cantidad, meses));
+  }, [cantidad, meses]);
 
   const formatearDinero = (valor) => {
     const formater = new Intl.NumberFormat("en-US", {
@@ -70,8 +39,7 @@ function App() {
     setTotal(calcularTotalPagar(cantidad, meses));
   };
   const cambiarMeses = (e) => {
-    setMeses(e.target.value);
-    //setTotal(calcularTotalPagar(cantidad, meses));
+    setMeses(parseInt(e.target.value));
   };
 
   const handleChangeIncremento = () => {
@@ -95,9 +63,6 @@ function App() {
     setTotal(calcularTotalPagar(cantidad, meses));
   };
 
-  //============
-  //== RETURN ==
-  //============
   return (
     <>
       <div className="my-20 max-w-lg mx-auto bg-indigo-50 shadow-xl p-10">
@@ -156,7 +121,7 @@ function App() {
               Total a pagar: {formatearDinero(total)}
             </p>
             <p className="text-xl text-gray-500 text-center font-bold">
-              Mensualidad: {formatearDinero(pagoMensual())}
+              Mensualidad: {formatearDinero(pagoMensual)}
             </p>
           </div>
         ) : (
